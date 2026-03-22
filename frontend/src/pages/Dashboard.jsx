@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FileDropzone from "../components/FileDropzone";
+import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import { restoreMarketingDraft } from "../components/MarketingTool";
-import RewardedAdModal from "../components/RewardedAdModal";
 import { useAuth } from "../context/AuthContext";
 import { analyzeText, uploadDocument } from "../services/api";
 
@@ -15,7 +15,6 @@ function Dashboard() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showRewardedAd, setShowRewardedAd] = useState(false);
 
   useEffect(() => {
     const draft = restoreMarketingDraft();
@@ -44,7 +43,7 @@ function Dashboard() {
       navigate("/results", { state: result });
     } catch (requestError) {
       if (requestError?.response?.data?.error === "SCAN_LOCKED") {
-        setShowRewardedAd(true);
+        setError("No scans remaining right now. Free ad-based unlocks are temporarily disabled.");
         return;
       }
 
@@ -82,10 +81,9 @@ function Dashboard() {
               with your authenticated scan balance.
             </p>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
               {[
                 `${user?.scansRemaining ?? 0} scans remaining`,
-                `${user?.adsWatchedToday ?? 0} ads watched today`,
                 user?.email || "Authenticated account"
               ].map((item) => (
                 <div
@@ -152,20 +150,9 @@ function Dashboard() {
           </div>
         </section>
       </div>
-
-      <RewardedAdModal
-        isOpen={showRewardedAd}
-        onClose={() => setShowRewardedAd(false)}
-        onUnlocked={(usageUpdate) => {
-          updateUser({
-            ...user,
-            scansRemaining: usageUpdate.scansRemaining,
-            adsWatchedToday: usageUpdate.adsWatchedToday
-          });
-          setShowRewardedAd(false);
-          setNotice("Next scan unlocked. You can analyze your document now.");
-        }}
-      />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <Footer />
+      </div>
     </main>
   );
 }
