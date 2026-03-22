@@ -1,28 +1,43 @@
 const axios = require("axios");
 
-async function detectAiContent(text) {
-  const baseURL = process.env.AI_SERVICE_URL || "http://127.0.0.1:5001";
+async function detectAI(text) {
+  const normalizedText = String(text || "").trim();
+  const fallbackUrl =
+    process.env.NODE_ENV === "production" ? "" : "http://localhost:5001";
+  const rawBaseUrl = process.env.AI_SERVICE_URL || fallbackUrl;
+  const baseUrl = String(rawBaseUrl || "").replace(/\/+$/, "");
+
+  if (!normalizedText) {
+    return 0;
+  }
+
+  if (!baseUrl) {
+    console.error("AI service error: AI_SERVICE_URL is not configured.");
+    return 0;
+  }
 
   try {
     const response = await axios.post(
-      `${baseURL}/detect`,
-      { text },
-      { timeout: 120000 }
+      `${baseUrl}/detect`,
+      { text: normalizedText },
+      {
+        timeout: 120000,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
     );
 
-    return {
-      ai_probability: Number(response.data.ai_probability || 0),
-      label: response.data.label || "Human"
-    };
+    return Number(response.data?.aiScore || 0);
   } catch (error) {
-    console.error("AI detection service error:", error.message);
-    return {
-      ai_probability: 0,
-      label: "Human"
-    };
+    console.error(
+      `AI service error via ${baseUrl}:`,
+      error.response?.data || error.message
+    );
+    return 0;
   }
 }
 
 module.exports = {
-  detectAiContent
+  detectAI
 };
