@@ -64,6 +64,14 @@ export async function loginUser(payload) {
   return postAuth("/login", payload);
 }
 
+export async function forgotPassword(payload) {
+  return postAuth("/forgot-password", payload);
+}
+
+export async function resetPassword(payload) {
+  return postAuth("/reset-password", payload);
+}
+
 export async function loginWithGoogle(credential) {
   return postAuth("/google", { credential });
 }

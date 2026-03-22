@@ -1,8 +1,10 @@
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const { OAuth2Client } = require("google-auth-library");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const { DAILY_SCAN_LIMIT, syncDailyScanAllowance } = require("../services/usageService");
+const { sendPasswordResetEmail } = require("../services/emailService");
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -146,6 +148,91 @@ async function googleLoginController(req, res, next) {
   }
 }
 
+async function forgotPasswordController(req, res, next) {
+  try {
+    const email = String(req.body?.email || "").toLowerCase().trim();
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required." });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.json({
+        message: "If an account exists for that email, a reset link has been sent."
+      });
+    }
+
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const passwordResetTokenHash = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
+
+    user.passwordResetTokenHash = passwordResetTokenHash;
+    user.passwordResetExpiresAt = new Date(Date.now() + 60 * 60 * 1000);
+    await user.save();
+
+    const baseFrontendUrl = (process.env.FRONTEND_URL || "http://localhost:5173")
+      .split(",")[0]
+      .trim()
+      .replace(/\/+$/, "");
+    const resetUrl = `${baseFrontendUrl}/reset-password?token=${resetToken}`;
+
+    await sendPasswordResetEmail({
+      email: user.email,
+      resetUrl
+    });
+
+    return res.json({
+      message: "If an account exists for that email, a reset link has been sent."
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+async function resetPasswordController(req, res, next) {
+  try {
+    const token = String(req.body?.token || "").trim();
+    const password = String(req.body?.password || "");
+
+    if (!token || password.length < 6) {
+      return res.status(400).json({
+        message: "A valid reset token and password of at least 6 characters are required."
+      });
+    }
+
+    const passwordResetTokenHash = crypto
+      .createHash("sha256")
+      .update(token)
+      .digest("hex");
+
+    const user = await User.findOne({
+      passwordResetTokenHash,
+      passwordResetExpiresAt: { $gt: new Date() }
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        message: "This reset link is invalid or has expired."
+      });
+    }
+
+    user.passwordHash = await bcrypt.hash(password, 12);
+    user.passwordResetTokenHash = null;
+    user.passwordResetExpiresAt = null;
+    await user.save();
+
+    return res.json({
+      message: "Your password has been reset. You can now log in."
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 function meController(req, res) {
   return res.json({
     user: serializeUser(req.user)
@@ -156,6 +243,8 @@ module.exports = {
   signupController,
   loginController,
   googleLoginController,
+  forgotPasswordController,
+  resetPasswordController,
   meController,
   serializeUser
 };

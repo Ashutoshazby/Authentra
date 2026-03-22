@@ -55,6 +55,11 @@ function LoginPage() {
               placeholder="Password"
               className="w-full rounded-2xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-white outline-none transition focus:border-aqua"
             />
+            <div className="text-right">
+              <Link to="/forgot-password" className="text-sm font-medium text-aqua">
+                Forgot password?
+              </Link>
+            </div>
 
             {error ? (
               <div className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">
