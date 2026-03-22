@@ -42,8 +42,11 @@ function Dashboard() {
       });
       navigate("/results", { state: result });
     } catch (requestError) {
-      if (requestError?.response?.data?.error === "SCAN_LOCKED") {
-        setError("No scans remaining right now. Free ad-based unlocks are temporarily disabled.");
+      if (requestError?.response?.data?.error === "DAILY_SCAN_LIMIT_REACHED") {
+        setError(
+          requestError?.response?.data?.message ||
+            "You have reached today's 6-scan limit. Please try again tomorrow."
+        );
         return;
       }
 
@@ -78,12 +81,12 @@ function Dashboard() {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
               Upload or paste a document to run AI detection and plagiarism analysis
-              with your authenticated scan balance.
+              with your daily scan allowance.
             </p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
               {[
-                `${user?.scansRemaining ?? 0} scans remaining`,
+                `${user?.scansRemaining ?? 0} of 6 scans remaining today`,
                 user?.email || "Authenticated account"
               ].map((item) => (
                 <div

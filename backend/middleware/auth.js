@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { syncDailyScanAllowance } = require("../services/usageService");
 
 async function requireAuth(req, res, next) {
   try {
@@ -20,6 +21,7 @@ async function requireAuth(req, res, next) {
       return res.status(401).json({ error: "UNAUTHORIZED" });
     }
 
+    await syncDailyScanAllowance(user);
     req.user = user;
     req.token = token;
     return next();

@@ -22,8 +22,11 @@ async function analyzeTextController(req, res, next) {
 
     return res.json(result);
   } catch (error) {
-    if ((error.code || error.message) === "SCAN_LOCKED") {
-      return res.status(403).json({ error: "SCAN_LOCKED" });
+    if ((error.code || error.message) === "DAILY_SCAN_LIMIT_REACHED") {
+      return res.status(403).json({
+        error: "DAILY_SCAN_LIMIT_REACHED",
+        message: "You have reached today's 6-scan limit. Please try again tomorrow."
+      });
     }
     return next(error);
   }
@@ -55,8 +58,11 @@ async function uploadDocumentController(req, res, next) {
 
     return res.json(result);
   } catch (error) {
-    if ((error.code || error.message) === "SCAN_LOCKED") {
-      return res.status(403).json({ error: "SCAN_LOCKED" });
+    if ((error.code || error.message) === "DAILY_SCAN_LIMIT_REACHED") {
+      return res.status(403).json({
+        error: "DAILY_SCAN_LIMIT_REACHED",
+        message: "You have reached today's 6-scan limit. Please try again tomorrow."
+      });
     }
     return next(error);
   }

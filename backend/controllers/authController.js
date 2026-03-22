@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const { OAuth2Client } = require("google-auth-library");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { DAILY_SCAN_LIMIT, syncDailyScanAllowance } = require("../services/usageService");
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -42,8 +43,9 @@ async function signupController(req, res, next) {
     const user = await User.create({
       email: email.toLowerCase().trim(),
       passwordHash,
-      scansRemaining: 1,
-      adsWatchedToday: 0
+      scansRemaining: DAILY_SCAN_LIMIT,
+      adsWatchedToday: 0,
+      lastScanResetAt: new Date()
     });
 
     const token = createToken(user);
@@ -87,6 +89,8 @@ async function loginController(req, res, next) {
       return res.status(401).json({ message: "Invalid email or password." });
     }
 
+    await syncDailyScanAllowance(user);
+
     const token = createToken(user);
     return res.json({
       token,
@@ -121,13 +125,16 @@ async function googleLoginController(req, res, next) {
       user = await User.create({
         email: payload.email.toLowerCase().trim(),
         googleId: payload.sub,
-        scansRemaining: 1,
-        adsWatchedToday: 0
+        scansRemaining: DAILY_SCAN_LIMIT,
+        adsWatchedToday: 0,
+        lastScanResetAt: new Date()
       });
     } else if (!user.googleId) {
       user.googleId = payload.sub;
       await user.save();
     }
+
+    await syncDailyScanAllowance(user);
 
     const token = createToken(user);
     return res.json({
