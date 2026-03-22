@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 import MarketingTool from "../components/MarketingTool";
 import SeoHead from "../components/SeoHead";
 import { internalLinks } from "../data/seoPages";
@@ -43,8 +44,8 @@ function SeoLandingPage({ page }) {
         faqSchema={faqSchema}
       />
 
-      <main className="min-h-screen px-4 py-8 text-white sm:px-6 lg:px-10">
-        <div className="mx-auto max-w-7xl">
+      <main className="flex min-h-screen flex-col px-4 py-8 text-white sm:px-6 lg:px-10">
+        <div className="mx-auto w-full max-w-7xl flex-1">
           <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="pt-6">
               <div className="inline-flex rounded-full border border-aqua/30 bg-aqua/10 px-4 py-2 text-xs uppercase tracking-[0.35em] text-aqua">
@@ -123,6 +124,9 @@ function SeoLandingPage({ page }) {
               ))}
             </div>
           </section>
+        </div>
+        <div className="mx-auto w-full max-w-7xl">
+          <Footer />
         </div>
       </main>
     </>

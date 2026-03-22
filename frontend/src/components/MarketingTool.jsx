@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
-import RewardedAdModal from "./RewardedAdModal";
 import { useAuth } from "../context/AuthContext";
 import { analyzeText } from "../services/api";
 
@@ -14,7 +13,6 @@ function MarketingTool({ title, description, placeholder }) {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showRewardedAd, setShowRewardedAd] = useState(false);
 
   const handleAnalyze = async () => {
     setError("");
@@ -40,8 +38,11 @@ function MarketingTool({ title, description, placeholder }) {
       });
       navigate("/results", { state: result });
     } catch (requestError) {
-      if (requestError?.response?.data?.error === "SCAN_LOCKED") {
-        setShowRewardedAd(true);
+      if (requestError?.response?.data?.error === "DAILY_SCAN_LIMIT_REACHED") {
+        setError(
+          requestError?.response?.data?.message ||
+            "You have reached today's 6-scan limit. Please try again tomorrow."
+        );
         return;
       }
 
@@ -98,27 +99,13 @@ function MarketingTool({ title, description, placeholder }) {
               </button>
               <p className="text-sm text-slate-400">
                 {isAuthenticated
-                  ? `${user?.scansRemaining ?? 0} scans remaining on your account`
+                  ? `${user?.scansRemaining ?? 0} of 6 scans remaining today`
                   : "Login required to run the scan after pasting your content"}
               </p>
             </div>
           </div>
         )}
       </section>
-
-      <RewardedAdModal
-        isOpen={showRewardedAd}
-        onClose={() => setShowRewardedAd(false)}
-        onUnlocked={(usageUpdate) => {
-          updateUser({
-            ...user,
-            scansRemaining: usageUpdate.scansRemaining,
-            adsWatchedToday: usageUpdate.adsWatchedToday
-          });
-          setShowRewardedAd(false);
-          setNotice("Next scan unlocked. You can run the analysis now.");
-        }}
-      />
     </>
   );
 }
