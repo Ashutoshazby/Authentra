@@ -13,15 +13,26 @@ function getTransporter() {
     throw new Error("SMTP is not configured. Set SMTP_HOST, SMTP_PORT, SMTP_USER, and SMTP_PASS.");
   }
 
-  transporter = nodemailer.createTransport({
+  const port = Number(SMTP_PORT);
+  const transportConfig = {
     host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: Number(SMTP_PORT) === 465,
+    port,
+    secure: port === 465,
+    requireTLS: port !== 465,
     auth: {
       user: SMTP_USER,
       pass: SMTP_PASS
-    }
-  });
+    },
+    connectionTimeout: 15000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000
+  };
+
+  if (SMTP_HOST.includes("gmail")) {
+    transportConfig.service = "gmail";
+  }
+
+  transporter = nodemailer.createTransport(transportConfig);
 
   return transporter;
 }
