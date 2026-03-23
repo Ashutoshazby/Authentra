@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const dns = require("dns");
 
 let transporter;
 
@@ -19,13 +20,21 @@ function getTransporter() {
     port,
     secure: port === 465,
     requireTLS: port !== 465,
+    family: 4,
+    dnsTimeout: 10000,
+    tls: {
+      servername: SMTP_HOST
+    },
     auth: {
       user: SMTP_USER,
       pass: SMTP_PASS
     },
     connectionTimeout: 15000,
     greetingTimeout: 10000,
-    socketTimeout: 20000
+    socketTimeout: 20000,
+    lookup(hostname, options, callback) {
+      return dns.lookup(hostname, { ...options, family: 4 }, callback);
+    }
   };
 
   if (SMTP_HOST.includes("gmail")) {
