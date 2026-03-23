@@ -44,11 +44,13 @@ function SeoLandingPage({ page }) {
         faqSchema={faqSchema}
       />
 
-      <main className="flex min-h-screen flex-col px-4 py-8 text-white sm:px-6 lg:px-10">
+      <main className="page-shell flex min-h-screen flex-col px-4 py-8 text-white sm:px-6 lg:px-10">
+        <div className="page-orb" />
+        <div className="page-orb-secondary" />
         <div className="mx-auto w-full max-w-7xl flex-1">
           <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="pt-6">
-              <div className="inline-flex rounded-full border border-aqua/30 bg-aqua/10 px-4 py-2 text-xs uppercase tracking-[0.35em] text-aqua">
+            <div className="reveal-up pt-6">
+              <div className="brand-badge text-[11px] text-aqua">
                 {page.heroEyebrow}
               </div>
               <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight text-white md:text-6xl">
@@ -61,13 +63,13 @@ function SeoLandingPage({ page }) {
               <div className="mt-10 flex flex-wrap gap-3">
                 <Link
                   to="/signup"
-                  className="rounded-full bg-accent px-5 py-3 text-sm font-bold text-white transition hover:bg-orange-500"
+                  className="primary-btn rounded-full px-5 py-3 text-sm text-white"
                 >
                   Start Free
                 </Link>
                 <Link
                   to="/login"
-                  className="rounded-full border border-slate-700 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-aqua hover:text-aqua"
+                  className="secondary-btn px-5 py-3 text-sm font-semibold text-slate-200"
                 >
                   Login
                 </Link>
@@ -82,7 +84,7 @@ function SeoLandingPage({ page }) {
           </section>
 
           <section className="mt-14 grid gap-8 lg:grid-cols-[1fr_0.9fr]">
-            <div className="glass rounded-[2rem] border border-slate-800 p-6 sm:p-8">
+            <div className="glass reveal-up reveal-delay-1 rounded-[2rem] border border-slate-800 p-6 sm:p-8">
               <p className="text-sm uppercase tracking-[0.3em] text-gold">SEO Content</p>
               <h2 className="mt-3 text-3xl font-black text-white">{page.contentTitle}</h2>
               <div className="mt-5 space-y-4 text-base leading-8 text-slate-300">
@@ -92,7 +94,7 @@ function SeoLandingPage({ page }) {
               </div>
             </div>
 
-            <div className="glass rounded-[2rem] border border-slate-800 p-6 sm:p-8">
+            <div className="glass reveal-up reveal-delay-2 rounded-[2rem] border border-slate-800 p-6 sm:p-8">
               <p className="text-sm uppercase tracking-[0.3em] text-aqua">Internal Links</p>
               <div className="mt-5 grid gap-3">
                 {internalLinks
@@ -110,7 +112,7 @@ function SeoLandingPage({ page }) {
             </div>
           </section>
 
-          <section className="mt-14 glass rounded-[2rem] border border-slate-800 p-6 sm:p-8">
+          <section className="mt-14 glass reveal-up reveal-delay-3 rounded-[2rem] border border-slate-800 p-6 sm:p-8">
             <p className="text-sm uppercase tracking-[0.3em] text-gold">FAQ</p>
             <div className="mt-6 grid gap-4">
               {page.faqs.map((faq) => (

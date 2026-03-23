@@ -31,10 +31,12 @@ function SignupPage() {
   };
 
   return (
-    <main className="min-h-screen px-4 py-10 text-white">
+    <main className="page-shell min-h-screen px-4 py-10 text-white">
+      <div className="page-orb" />
+      <div className="page-orb-secondary" />
       <div className="flex min-h-[calc(100vh-120px)] items-center justify-center">
-        <div className="glass w-full max-w-md rounded-[2rem] border border-slate-800 p-8 shadow-glow">
-          <p className="text-xs uppercase tracking-[0.35em] text-gold">Start Free</p>
+        <div className="glass reveal-up w-full max-w-md rounded-[2rem] border border-slate-800 p-8 shadow-glow">
+          <p className="brand-badge text-[11px] text-gold">Start Free</p>
           <h1 className="mt-4 text-4xl font-black">Create account</h1>
           <p className="mt-3 text-sm leading-7 text-slate-400">
             Each new account starts with 6 scans per day, refreshed automatically.
@@ -46,14 +48,14 @@ function SignupPage() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="Email address"
-              className="w-full rounded-2xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-white outline-none transition focus:border-aqua"
+              className="lux-input w-full rounded-2xl px-4 py-3 text-sm text-white outline-none"
             />
             <input
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               placeholder="Password (min 6 characters)"
-              className="w-full rounded-2xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-white outline-none transition focus:border-aqua"
+              className="lux-input w-full rounded-2xl px-4 py-3 text-sm text-white outline-none"
             />
 
             {error ? (
@@ -65,7 +67,7 @@ function SignupPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-2xl bg-gradient-to-r from-accent to-gold px-5 py-3 font-bold text-slate-950 transition hover:brightness-110 disabled:opacity-60"
+              className="primary-btn w-full px-5 py-3 disabled:opacity-60"
             >
               {submitting ? "Creating..." : "Sign up"}
             </button>

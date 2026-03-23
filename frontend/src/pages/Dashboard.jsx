@@ -60,18 +60,20 @@ function Dashboard() {
   };
 
   return (
-    <main className="min-h-screen px-4 py-8 text-white sm:px-6 lg:px-10">
+    <main className="page-shell min-h-screen px-4 py-8 text-white sm:px-6 lg:px-10">
+      <div className="page-orb" />
+      <div className="page-orb-secondary" />
       <div className="mx-auto max-w-7xl">
         <section className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="pt-6">
+          <div className="reveal-up pt-6">
             <div className="flex items-start justify-between gap-4">
-              <div className="inline-flex rounded-full border border-aqua/30 bg-aqua/10 px-4 py-2 text-xs uppercase tracking-[0.35em] text-aqua">
+              <div className="brand-badge text-[11px] text-aqua">
                 Dashboard
               </div>
               <button
                 type="button"
                 onClick={logout}
-                className="rounded-full border border-slate-700 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-300 transition hover:border-accent hover:text-accent"
+                className="secondary-btn px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-300"
               >
                 Logout
               </button>
@@ -89,17 +91,14 @@ function Dashboard() {
                 `${user?.scansRemaining ?? 0} of 6 scans remaining today`,
                 user?.email || "Authenticated account"
               ].map((item) => (
-                <div
-                  key={item}
-                  className="glass rounded-2xl border border-slate-800 px-4 py-4 text-sm text-slate-200"
-                >
+                <div key={item} className="glass reveal-up reveal-delay-1 rounded-[1.6rem] border border-slate-800 px-4 py-4 text-sm text-slate-200">
                   {item}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="glass rounded-[2rem] border border-slate-800 p-5 shadow-glow sm:p-8">
+          <div className="glass reveal-up reveal-delay-2 rounded-[2rem] border border-slate-800 p-5 shadow-glow sm:p-8">
             {loading ? (
               <Loader />
             ) : (
@@ -108,7 +107,7 @@ function Dashboard() {
                   <p className="text-sm uppercase tracking-[0.3em] text-gold">
                     Analyze Document
                   </p>
-                  <h2 className="mt-2 text-2xl font-bold text-white">
+                  <h2 className="mt-2 text-3xl font-black text-white">
                     Run your next scan
                   </h2>
                 </div>
@@ -117,7 +116,7 @@ function Dashboard() {
                   value={text}
                   onChange={(event) => setText(event.target.value)}
                   placeholder="Paste essay, article, or research paper text here..."
-                  className="min-h-[260px] w-full rounded-3xl border border-slate-800 bg-slate-950/60 p-5 text-sm leading-7 text-slate-100 outline-none transition focus:border-aqua"
+                  className="lux-input min-h-[260px] w-full rounded-3xl p-5 text-sm leading-7 text-slate-100 outline-none"
                 />
 
                 <FileDropzone
@@ -144,7 +143,7 @@ function Dashboard() {
                 <button
                   type="button"
                   onClick={handleAnalyze}
-                  className="w-full rounded-2xl bg-gradient-to-r from-accent to-gold px-6 py-4 text-base font-bold text-slate-950 transition hover:brightness-110"
+                  className="primary-btn w-full px-6 py-4 text-base"
                 >
                   Analyze Document
                 </button>

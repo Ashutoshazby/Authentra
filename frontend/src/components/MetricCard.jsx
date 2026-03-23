@@ -1,16 +1,19 @@
 function MetricCard({ label, value, tone }) {
   const toneClasses = {
-    aqua: "from-cyan-400/20 to-cyan-200/5 border-cyan-400/30 text-cyan-200",
-    orange: "from-orange-400/20 to-orange-200/5 border-orange-400/30 text-orange-200",
-    gold: "from-yellow-300/20 to-yellow-100/5 border-yellow-300/30 text-yellow-100"
+    aqua:
+      "from-cyan-400/20 via-cyan-300/8 to-transparent border-cyan-400/30 text-cyan-200 shadow-[0_20px_45px_rgba(34,211,238,0.08)]",
+    orange:
+      "from-orange-400/18 via-orange-200/8 to-transparent border-orange-400/30 text-orange-200 shadow-[0_20px_45px_rgba(249,115,22,0.08)]",
+    gold:
+      "from-yellow-300/18 via-yellow-100/8 to-transparent border-yellow-300/30 text-yellow-100 shadow-[0_20px_45px_rgba(250,204,21,0.08)]"
   };
 
   return (
     <div
-      className={`rounded-3xl border bg-gradient-to-br p-5 ${toneClasses[tone] || toneClasses.aqua}`}
+      className={`glass reveal-up rounded-[2rem] border bg-gradient-to-br p-6 ${toneClasses[tone] || toneClasses.aqua}`}
     >
-      <p className="text-sm uppercase tracking-[0.25em] text-slate-300">{label}</p>
-      <p className="mt-4 text-4xl font-black">{value}%</p>
+      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">{label}</p>
+      <p className="mt-5 text-5xl font-black">{value}%</p>
     </div>
   );
 }

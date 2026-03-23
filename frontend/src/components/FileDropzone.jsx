@@ -24,10 +24,10 @@ function FileDropzone({ file, onFileSelect, onFileClear }) {
         setIsDragging(false);
         handleFiles(event.dataTransfer.files);
       }}
-      className={`rounded-3xl border border-dashed p-6 transition ${
+      className={`rounded-[2rem] border border-dashed p-6 transition duration-200 ${
         isDragging
           ? "border-aqua bg-cyan-400/10 shadow-glow"
-          : "border-slate-700 bg-slate-900/40"
+          : "border-slate-700/80 bg-slate-950/35"
       }`}
     >
       <input
@@ -39,10 +39,10 @@ function FileDropzone({ file, onFileSelect, onFileClear }) {
       />
 
       <div className="flex flex-col items-start gap-3 text-sm text-slate-300">
-        <div className="rounded-full bg-slate-800/80 px-3 py-1 text-xs uppercase tracking-[0.3em] text-aqua">
+        <div className="brand-badge text-[11px] text-aqua">
           Upload file
         </div>
-        <p className="text-base font-medium text-white">
+        <p className="text-lg font-semibold text-white">
           Drag and drop a PDF, DOCX, or TXT file here
         </p>
         <p className="text-sm text-slate-400">
@@ -50,7 +50,7 @@ function FileDropzone({ file, onFileSelect, onFileClear }) {
         </p>
 
         {file ? (
-          <div className="mt-2 flex w-full items-center justify-between rounded-2xl border border-slate-700 bg-slate-950/60 px-4 py-3">
+          <div className="mt-2 flex w-full items-center justify-between rounded-2xl border border-slate-700 bg-slate-950/70 px-4 py-3">
             <div>
               <p className="font-semibold text-white">{file.name}</p>
               <p className="text-xs text-slate-400">
@@ -60,7 +60,7 @@ function FileDropzone({ file, onFileSelect, onFileClear }) {
             <button
               type="button"
               onClick={onFileClear}
-              className="rounded-full border border-slate-700 px-3 py-1 text-xs font-medium text-slate-200 transition hover:border-accent hover:text-accent"
+              className="secondary-btn rounded-full px-3 py-1 text-xs font-medium text-slate-200"
             >
               Remove
             </button>
@@ -70,7 +70,7 @@ function FileDropzone({ file, onFileSelect, onFileClear }) {
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="mt-2 rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-orange-500"
+          className="primary-btn mt-2 rounded-full px-5 py-2 text-sm"
         >
           Choose file
         </button>

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 import HighlightedText from "../components/HighlightedText";
 import MetricCard from "../components/MetricCard";
 
@@ -37,16 +38,18 @@ function ResultPage() {
   }
 
   return (
-    <main className="min-h-screen px-4 py-8 text-white sm:px-6 lg:px-10">
+    <main className="page-shell min-h-screen px-4 py-8 text-white sm:px-6 lg:px-10">
+      <div className="page-orb" />
+      <div className="page-orb-secondary" />
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 reveal-up">
           <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-aqua">Result Page</p>
+            <p className="brand-badge text-[11px] text-aqua">Result Page</p>
             <h1 className="mt-2 text-4xl font-black">Document Analysis Report</h1>
           </div>
           <Link
             to="/dashboard"
-            className="rounded-full border border-slate-700 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-aqua hover:text-aqua"
+            className="secondary-btn px-5 py-3 text-sm font-semibold text-slate-200"
           >
             Analyze another document
           </Link>
@@ -67,7 +70,7 @@ function ResultPage() {
         </section>
 
         <section className="mt-8 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="glass rounded-[2rem] border border-slate-800 p-6">
+          <div className="glass reveal-up reveal-delay-1 rounded-[2rem] border border-slate-800 p-6">
             <div className="mb-5 flex items-center justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-bold">Highlighted text</h2>
@@ -83,7 +86,7 @@ function ResultPage() {
           </div>
 
           <div className="space-y-5">
-            <div className="glass rounded-[2rem] border border-slate-800 p-6">
+            <div className="glass reveal-up reveal-delay-2 rounded-[2rem] border border-slate-800 p-6">
               <h2 className="text-2xl font-bold">Similarity results</h2>
               <p className="mt-2 text-sm text-slate-400">
                 Top sentence-level matches ranked by combined plagiarism score.
@@ -119,6 +122,9 @@ function ResultPage() {
             </div>
           </div>
         </section>
+      </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+        <Footer />
       </div>
     </main>
   );
