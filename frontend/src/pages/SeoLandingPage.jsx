@@ -53,17 +53,17 @@ function SeoLandingPage({ page }) {
               <div className="brand-badge text-[11px] text-aqua">
                 {page.heroEyebrow}
               </div>
-              <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight text-white md:text-6xl">
+              <h1 className="editorial-heading mt-6 max-w-4xl text-5xl font-bold leading-tight text-white md:text-6xl">
                 {page.heroTitle}
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+              <p className="copy-soft mt-6 max-w-3xl text-lg leading-8">
                 {page.heroDescription}
               </p>
 
               <div className="mt-10 flex flex-wrap gap-3">
                 <Link
                   to="/signup"
-                  className="primary-btn rounded-full px-5 py-3 text-sm text-white"
+                  className="primary-btn rounded-full px-6 py-3 text-sm text-white"
                 >
                   Start Free
                 </Link>
@@ -85,9 +85,9 @@ function SeoLandingPage({ page }) {
 
           <section className="mt-14 grid gap-8 lg:grid-cols-[1fr_0.9fr]">
             <div className="glass reveal-up reveal-delay-1 rounded-[2rem] border border-slate-800 p-6 sm:p-8">
-              <p className="text-sm uppercase tracking-[0.3em] text-gold">SEO Content</p>
-              <h2 className="mt-3 text-3xl font-black text-white">{page.contentTitle}</h2>
-              <div className="mt-5 space-y-4 text-base leading-8 text-slate-300">
+              <p className="eyebrow">About the tool</p>
+              <h2 className="editorial-heading mt-3 text-3xl font-semibold text-white">{page.contentTitle}</h2>
+              <div className="copy-soft mt-5 space-y-4 text-base leading-8">
                 {page.contentParagraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -95,7 +95,7 @@ function SeoLandingPage({ page }) {
             </div>
 
             <div className="glass reveal-up reveal-delay-2 rounded-[2rem] border border-slate-800 p-6 sm:p-8">
-              <p className="text-sm uppercase tracking-[0.3em] text-aqua">Internal Links</p>
+              <p className="eyebrow">Explore more</p>
               <div className="mt-5 grid gap-3">
                 {internalLinks
                   .filter((link) => link.href !== page.slug)
@@ -113,15 +113,15 @@ function SeoLandingPage({ page }) {
           </section>
 
           <section className="mt-14 glass reveal-up reveal-delay-3 rounded-[2rem] border border-slate-800 p-6 sm:p-8">
-            <p className="text-sm uppercase tracking-[0.3em] text-gold">FAQ</p>
+            <p className="eyebrow">Questions people ask</p>
             <div className="mt-6 grid gap-4">
               {page.faqs.map((faq) => (
                 <div
                   key={faq.question}
                   className="rounded-3xl border border-slate-800 bg-slate-950/45 p-5"
                 >
-                  <h3 className="text-lg font-bold text-white">{faq.question}</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-400">{faq.answer}</p>
+                  <h3 className="text-lg font-semibold text-white">{faq.question}</h3>
+                  <p className="copy-soft mt-2 text-sm leading-7">{faq.answer}</p>
                 </div>
               ))}
             </div>

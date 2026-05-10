@@ -37,8 +37,8 @@ function LoginPage() {
       <div className="flex min-h-[calc(100vh-120px)] items-center justify-center">
         <div className="glass reveal-up w-full max-w-md rounded-[2rem] border border-slate-800 p-8 shadow-glow">
           <p className="brand-badge text-[11px] text-aqua">Authentra</p>
-          <h1 className="mt-4 text-4xl font-black">Login</h1>
-          <p className="mt-3 text-sm leading-7 text-slate-400">
+          <h1 className="editorial-heading mt-4 text-4xl font-semibold">Login</h1>
+          <p className="copy-soft mt-3 text-sm leading-7">
             Sign in to continue using your 6 daily AI and plagiarism scans.
           </p>
 

@@ -4,13 +4,12 @@
 
 :root {
   color-scheme: dark;
-  font-family: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: "Aptos", "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(86, 215, 199, 0.22), transparent 28%),
-    radial-gradient(circle at 85% 20%, rgba(244, 201, 93, 0.16), transparent 24%),
-    radial-gradient(circle at 50% 100%, rgba(255, 122, 89, 0.12), transparent 30%),
-    linear-gradient(135deg, #030816 0%, #08101f 45%, #050a13 100%);
-  color: #edf4fb;
+    radial-gradient(circle at 12% 10%, rgba(220, 187, 120, 0.08), transparent 24%),
+    radial-gradient(circle at 88% 18%, rgba(120, 167, 199, 0.08), transparent 22%),
+    linear-gradient(180deg, #07111f 0%, #0b1421 55%, #0a1320 100%);
+  color: #eef2f7;
 }
 
 html {
@@ -22,9 +21,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px);
-  background-size: 72px 72px;
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.03), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 30%);
 }
 
 * {
@@ -37,11 +35,11 @@ body {
 }
 
 .glass {
-  background: linear-gradient(180deg, rgba(8, 20, 36, 0.92), rgba(6, 13, 25, 0.82));
-  backdrop-filter: blur(22px);
+  background: linear-gradient(180deg, rgba(10, 21, 35, 0.94), rgba(9, 17, 29, 0.88));
+  backdrop-filter: blur(16px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 28px 60px rgba(2, 6, 23, 0.34);
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 44px rgba(1, 8, 18, 0.26);
 }
 
 .highlight-chip {
@@ -68,8 +66,8 @@ body {
   left: -3rem;
   height: 14rem;
   width: 14rem;
-  background: radial-gradient(circle, rgba(86, 215, 199, 0.26), transparent 70%);
-  animation: drift 10s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(131, 174, 197, 0.16), transparent 70%);
+  animation: drift 16s ease-in-out infinite;
 }
 
 .page-orb-secondary {
@@ -77,8 +75,8 @@ body {
   top: 6rem;
   height: 18rem;
   width: 18rem;
-  background: radial-gradient(circle, rgba(244, 201, 93, 0.18), transparent 72%);
-  animation: drift 14s ease-in-out infinite reverse;
+  background: radial-gradient(circle, rgba(213, 177, 117, 0.12), transparent 72%);
+  animation: drift 20s ease-in-out infinite reverse;
 }
 
 .brand-badge {
@@ -86,11 +84,10 @@ body {
   align-items: center;
   gap: 0.75rem;
   border-radius: 9999px;
-  border: 1px solid rgba(86, 215, 199, 0.26);
-  background: rgba(7, 17, 31, 0.62);
-  padding: 0.75rem 1.1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
+  border: 1px solid rgba(173, 184, 196, 0.2);
+  background: rgba(11, 20, 32, 0.7);
+  padding: 0.7rem 1rem;
+  letter-spacing: 0.22em;
 }
 
 .brand-badge::before {
@@ -98,21 +95,21 @@ body {
   height: 0.65rem;
   width: 0.65rem;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #56d7c7, #f4c95d);
-  box-shadow: 0 0 18px rgba(86, 215, 199, 0.5);
+  background: linear-gradient(135deg, #8dc7c0, #d8b57a);
+  box-shadow: 0 0 12px rgba(141, 199, 192, 0.28);
 }
 
 .primary-btn {
   border: 0;
   border-radius: 1.2rem;
-  background: linear-gradient(135deg, #ff7a59, #f4c95d);
-  color: #04111f;
-  font-weight: 800;
+  background: linear-gradient(135deg, #d48b6e, #e2bf88);
+  color: #102031;
+  font-weight: 700;
   transition:
     transform 180ms ease,
     filter 180ms ease,
     box-shadow 180ms ease;
-  box-shadow: 0 16px 40px rgba(249, 115, 22, 0.18);
+  box-shadow: 0 12px 28px rgba(212, 139, 110, 0.18);
 }
 
 .primary-btn:hover {
@@ -122,8 +119,8 @@ body {
 
 .secondary-btn {
   border-radius: 9999px;
-  border: 1px solid rgba(148, 163, 184, 0.32);
-  background: rgba(15, 23, 42, 0.48);
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(15, 23, 42, 0.38);
   transition:
     border-color 180ms ease,
     color 180ms ease,
@@ -132,13 +129,13 @@ body {
 
 .secondary-btn:hover {
   transform: translateY(-1px);
-  border-color: rgba(86, 215, 199, 0.45);
-  color: #7ce9dc;
+  border-color: rgba(214, 190, 142, 0.45);
+  color: #f2d8ab;
 }
 
 .lux-input {
-  border: 1px solid rgba(51, 65, 85, 0.8);
-  background: rgba(2, 8, 23, 0.55);
+  border: 1px solid rgba(57, 70, 89, 0.86);
+  background: rgba(7, 14, 24, 0.6);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition:
     border-color 180ms ease,
@@ -147,11 +144,27 @@ body {
 }
 
 .lux-input:focus {
-  border-color: rgba(86, 215, 199, 0.7);
+  border-color: rgba(214, 190, 142, 0.58);
   box-shadow:
-    0 0 0 4px rgba(86, 215, 199, 0.08),
+    0 0 0 4px rgba(214, 190, 142, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transform: translateY(-1px);
+}
+
+.editorial-heading {
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: -0.03em;
+}
+
+.eyebrow {
+  color: #d9c39a;
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.copy-soft {
+  color: #b8c3d1;
 }
 
 .reveal-up {

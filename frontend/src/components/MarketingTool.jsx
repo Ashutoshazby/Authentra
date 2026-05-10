@@ -57,15 +57,15 @@ function MarketingTool({ title, description, placeholder }) {
 
   return (
     <>
-      <section className="glass rounded-[2rem] border border-slate-800 p-6 shadow-glow sm:p-8">
+      <section className="glass reveal-up reveal-delay-1 rounded-[2rem] border border-slate-800 p-6 shadow-glow sm:p-8">
         {loading ? (
           <Loader message="Running your free Authentra scan..." />
         ) : (
           <div className="space-y-6">
             <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-gold">Free Tool</p>
-              <h2 className="mt-2 text-3xl font-black text-white">{title}</h2>
-              <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-400">
+              <p className="eyebrow">Try the tool</p>
+              <h2 className="editorial-heading mt-2 text-3xl font-semibold text-white">{title}</h2>
+              <p className="copy-soft mt-3 max-w-3xl text-sm leading-7">
                 {description}
               </p>
             </div>
@@ -74,7 +74,7 @@ function MarketingTool({ title, description, placeholder }) {
               value={text}
               onChange={(event) => setText(event.target.value)}
               placeholder={placeholder}
-              className="min-h-[240px] w-full rounded-3xl border border-slate-800 bg-slate-950/60 p-5 text-sm leading-7 text-slate-100 outline-none transition focus:border-aqua"
+              className="lux-input min-h-[240px] w-full rounded-3xl p-5 text-sm leading-7 text-slate-100 outline-none"
             />
 
             {error ? (
@@ -93,11 +93,11 @@ function MarketingTool({ title, description, placeholder }) {
               <button
                 type="button"
                 onClick={handleAnalyze}
-                className="rounded-2xl bg-gradient-to-r from-accent to-gold px-6 py-4 text-base font-bold text-slate-950 transition hover:brightness-110"
+                className="primary-btn px-6 py-4 text-base"
               >
                 Analyze Text
               </button>
-              <p className="text-sm text-slate-400">
+              <p className="copy-soft text-sm">
                 {isAuthenticated
                   ? `${user?.scansRemaining ?? 0} of 6 scans remaining today`
                   : "Login required to run the scan after pasting your content"}

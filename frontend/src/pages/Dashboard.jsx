@@ -78,10 +78,10 @@ function Dashboard() {
                 Logout
               </button>
             </div>
-            <h1 className="mt-6 max-w-3xl text-5xl font-black leading-tight text-white md:text-6xl">
+            <h1 className="editorial-heading mt-6 max-w-3xl text-5xl font-bold leading-tight text-white md:text-6xl">
               Welcome back to Authentra.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+            <p className="copy-soft mt-6 max-w-2xl text-lg leading-8">
               Upload or paste a document to run AI detection and plagiarism analysis
               with your daily scan allowance.
             </p>
@@ -104,10 +104,10 @@ function Dashboard() {
             ) : (
               <div className="space-y-6">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.3em] text-gold">
-                    Analyze Document
+                  <p className="eyebrow">
+                    Workspace
                   </p>
-                  <h2 className="mt-2 text-3xl font-black text-white">
+                  <h2 className="editorial-heading mt-2 text-3xl font-semibold text-white">
                     Run your next scan
                   </h2>
                 </div>
